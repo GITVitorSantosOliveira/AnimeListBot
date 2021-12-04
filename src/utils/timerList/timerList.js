@@ -22,7 +22,8 @@ async function timerList(idChat,bot,dataParameters){
         const sumHour = parseInt(hourSplited[0]) + 1
         if(currentHour >= sumHour || currentDate != data.date){
             getSeasonList(idChat,bot,dataParameters.year,dataParameters.season,dataParameters.format)
-          dataRead.groups.splice(idx,1)
+          
+            dataRead.groups.splice(idx,1)
 
           const dataChat = { 
             id: idChat, 
