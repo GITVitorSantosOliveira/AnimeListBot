@@ -13,8 +13,8 @@
     "nodemon": "^2.0.14"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/bot.js"
+    "start": "node ./src/bot.js",
+    "dev": "nodemon ./src/bot.js"
   },
   "author": "vitor santos",
   "license": "MIT"
