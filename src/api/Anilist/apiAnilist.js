@@ -6,7 +6,6 @@ const axios = require('axios')
             query,
             variables
           });
-          console.log({getDataApi: response.data})
           return response?.data
         } catch (error) {
           console.log({errorGetDataApi: error});

@@ -1,6 +1,5 @@
 
 const jikanjs  = require('jikanjs');
-// const request = require('request');
 const axios = require('axios');
 
 async function getList(year,season,idChat,bot) {

@@ -20,7 +20,7 @@ const getSeasonList = async (idChat, bot, year, season, format) => {
     };
 
     const dataApi = await getDataApi(query, variables);
-    const getResponse = dataApi.data.Page.media
+    const getResponse = await dataApi.data.Page.media
     getResponse.forEach(anime => {
       bot.sendMessage(idChat, anime.title.romaji)
     });
