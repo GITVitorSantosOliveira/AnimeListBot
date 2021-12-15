@@ -10,6 +10,16 @@ const { getAnime } = require('./graphql/schemas/anilist');
 const { getAnimeDay } = require('./api/MyAnimeList/apiMyAnimeList');
 const getDay = require('./utils/getDay');
 
+// config for heroku web start
+const express = require('express')
+
+const app = express()
+
+const port = process.env.PORT || 3000
+app.listen(port,() => {
+  console.log('listening on port ' + port)
+})
+
 //start command
 bot.onText(/\/start/, (msg)=>{
   const msgChatId = msg.chat.id
