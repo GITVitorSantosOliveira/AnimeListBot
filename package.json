@@ -15,7 +15,7 @@
     "nodemon": "^2.0.14"
   },
   "scripts": {
-    "web": "node ./src/bot.js",
+    "start": "node ./src/bot.js",
     "dev": "nodemon ./src/bot.js"
   },
   "author": "vitor santos",
