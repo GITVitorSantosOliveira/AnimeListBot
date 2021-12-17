@@ -4,10 +4,9 @@ require('dotenv/config')
 const TOKEN = process.env.BOT_TOKEN;
 const bot = new TelegramBot(TOKEN, {polling: true});
 const { parseDay } = require('./utils/parseParameters/parseDay');
-const { timerList } = require('./utils/timerList/timerList');
 const { getParameters } = require('./utils/tempList/utilsGetParameters');
-const { getAnime } = require('./graphql/schemas/anilist');
-const { getAnimeDay } = require('./api/MyAnimeList/apiMyAnimeList');
+const { getAnime, getSeasonList } = require('./graphql/schemas/anilist');
+const { getAnimeDay } = require('./api/MyAnimeList/getAnimeDay');
 const getDay = require('./utils/getDay');
 
 // config for heroku web start
@@ -49,9 +48,11 @@ bot.onText(/\/help/, (msg)=>{
 bot.onText(/\/templist (.+)/, (msg,match) => {
   const msgChatId = msg.chat.id
   const dataParameters = getParameters(match)
-
   try {
-     timerList(msgChatId,bot,dataParameters)
+    bot.sendMessage(msgChatId, "In Maintenance")
+    // bot.sendMessage(msgChatId,"Aguarde 10 segundos :)")
+    // getSeasonList(msgChatId,bot,dataParameters.year,dataParameters.season,dataParameters.format)
+    // timerList(msgChatId,bot,dataParameters)
 
   } catch (error) {
     console.log(error)
@@ -61,7 +62,6 @@ bot.onText(/\/templist (.+)/, (msg,match) => {
 bot.onText(/\/animeinfo (.+)/, (msg,match) => {
   const msgChatId = msg.chat.id
   
-  console.log(match[1].trim())
   const matchSplited = match[1].trim().split(',')
   const animeName = matchSplited[0]
   const format = matchSplited[1].toUpperCase()

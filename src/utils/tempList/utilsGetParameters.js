@@ -1,5 +1,4 @@
 function getParameters(match){
-  console.log(match)
   const matchSplit = match[1].split(',')
   const dataMatch = {
     year: parseInt(matchSplit[0]),

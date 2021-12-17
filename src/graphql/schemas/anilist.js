@@ -21,9 +21,13 @@ const getSeasonList = async (idChat, bot, year, season, format) => {
 
     const dataApi = await getDataApi(query, variables);
     const getResponse = await dataApi.data.Page.media
-    getResponse.forEach(anime => {
-      bot.sendMessage(idChat, anime.title.romaji)
-    });
+
+    setTimeout(() => {
+      getResponse.forEach(anime => {
+        bot.sendMessage(idChat, anime.title.romaji)
+      });
+    }, 10000);
+
   } catch (error) {
     console.error('error in getSeasonList', error)
     bot.sendMessage(idChat, 'Por Favor, verifique a o que você mandou. Dados permitidos: ano,temporada,formato')

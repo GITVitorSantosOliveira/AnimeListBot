@@ -2,6 +2,9 @@ const fs = require('fs');
 const { getSeasonList } = require('../../graphql/schemas/anilist');
 
 async function timerList(idChat,bot,dataParameters){
+  if(!dataParameters){
+    bot.sendMessage(idChat,"nenhum parametro passado digite /help para ver os comandos")
+  }
   const file = 'timerlist.json'
  try {
   await loadJson(file,idChat,bot,dataParameters);
