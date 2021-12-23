@@ -8,17 +8,24 @@ const { getParameters } = require('./utils/tempList/utilsGetParameters');
 const { getAnime, getSeasonList } = require('./graphql/schemas/anilist');
 const { getAnimeDay } = require('./api/MyAnimeList/getAnimeDay');
 const getDay = require('./utils/getDay');
+const keepRunning  = require('./utils/keepAppRunning');
 
 // config for heroku web start
-const express = require('express')
+const express = require('express');
 
 const app = express()
+app.use(express.json())
 
 const port = process.env.PORT || 3000
 app.listen(port,() => {
   console.log('listening on port ' + port)
 })
 
+app.get('/', (_req, res) => {
+  res.send('<h1>Heelo! Im an bot for telegram, and you can find me on here: @listsofanimebot </h1>')
+})
+///keep app running
+keepRunning()
 //start command
 bot.onText(/\/start/, (msg)=>{
   const msgChatId = msg.chat.id
