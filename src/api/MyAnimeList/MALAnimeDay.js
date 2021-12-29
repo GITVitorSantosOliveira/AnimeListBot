@@ -1,6 +1,6 @@
 const axios = require('axios');
 
- async function getAnimeDay(day,idChat,bot){
+ async function MALAnimeDay(day,idChat,bot){
    if(day === null){
      bot.sendMessage(idChat,'Por favor, Insira o dia da semana')
      return
@@ -103,4 +103,4 @@ const axios = require('axios');
    
  }
 
- module.exports.getAnimeDay = getAnimeDay;
+ module.exports.MALAnimeDay = MALAnimeDay;

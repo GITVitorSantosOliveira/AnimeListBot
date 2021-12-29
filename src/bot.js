@@ -6,12 +6,14 @@ const bot = new TelegramBot(TOKEN, {polling: true});
 const { parseDay } = require('./utils/parseParameters/parseDay');
 const { getParameters } = require('./utils/tempList/utilsGetParameters');
 const { getAnime, getSeasonList } = require('./graphql/schemas/anilist');
-const { getAnimeDay } = require('./api/MyAnimeList/getAnimeDay');
-const getDay = require('./utils/getDay');
+// const { MALAnimeDay } = require('./api/MyAnimeList/MALAnimeDay');
+// const getDay = require('./utils/getDay');
 const keepRunning  = require('./utils/keepAppRunning');
 
 // config for heroku web start
 const express = require('express');
+const { ScrapperByDays } = require('./api/WebScrapper/ScrapperByDays');
+const { CurrentDay } = require('./api/WebScrapper/CurrentDay');
 
 const app = express()
 app.use(express.json())
@@ -47,7 +49,7 @@ bot.onText(/\/help/, (msg)=>{
   bot.sendMessage(msgChatId, `O comando /animeinfo recebe o nome do anime e o formato(TV or Movie)\n\n
   Exemplo: animeinfo sword art online,tv
   `)
-  bot.sendMessage(msgChatId, `O comando /animeday pode receber o dia da semana ou não\n\n 
+  bot.sendMessage(msgChatId, `O comando /animeday pode receber o dia da semana ou não\n\n
   Exemplo: animeday segunda
   `)
 })
@@ -68,7 +70,7 @@ bot.onText(/\/templist (.+)/, (msg,match) => {
 
 bot.onText(/\/animeinfo (.+)/, (msg,match) => {
   const msgChatId = msg.chat.id
-  
+
   const matchSplited = match[1].trim().split(',')
   const animeName = matchSplited[0]
   const format = matchSplited[1].toUpperCase()
@@ -80,25 +82,47 @@ bot.onText(/\/animeinfo (.+)/, (msg,match) => {
   }
 })
 
-bot.onText(/\/animeday (.+)/, (msg,match)=>{
-  const msgChatId = msg.chat.id
-  const resp = match[1]
+//request by mal
+// bot.onText(/\/animeday (.+)/, (msg,match)=>{
+//   const msgChatId = msg.chat.id
+//   const resp = match[1]
 
-  const dayWeek = parseDay(resp,bot)
-  try {
-    getAnimeDay(dayWeek,msgChatId,bot)
-  } catch (error) {
-    console.log(error)
-  }
-})
+//   const dayWeek = parseDay(resp,bot)
+//   try {
+//     MALAnimeDay(dayWeek,msgChatId,bot)
+//   } catch (error) {
+//     console.log(error)
+//   }
+// })
+
+// bot.onText(/\/animeday/, (msg)=> {
+//   const dayWeek = getDay(msg.from.language_code)
+//   const dayWeekParsed = parseDay(dayWeek)
+
+//   try {
+//     getAnimeDay(dayWeekParsed,msg.chat.id,bot)
+//   } catch (error) {
+//     console.log(error)
+//   }
+// });
+
+//request by scrapper
+bot.onText(/\/animeday (.+)/, (msg,match)=>{
+    const msgChatId = msg.chat.id
+    const resp = match[1]
+
+    const dayWeek = parseDay(resp,bot)
+    try {
+      ScrapperByDays(dayWeek,msgChatId,bot)
+    } catch (error) {
+      console.log(error)
+    }
+  })
 
 bot.onText(/\/animeday/, (msg)=> {
-  const dayWeek = getDay(msg.from.language_code)
-  const dayWeekParsed = parseDay(dayWeek)
-
-  try {
-    getAnimeDay(dayWeekParsed,msg.chat.id,bot)
-  } catch (error) {
-    console.log(error)
-  }
-});
+    try {
+      CurrentDay(msg.text,msg.chat.id,bot)
+    } catch (error) {
+      console.log('error in catch bot',error)
+    }
+  });

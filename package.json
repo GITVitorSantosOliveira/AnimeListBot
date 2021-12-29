@@ -18,7 +18,7 @@
   "scripts": {
     "start": "node ./src/bot.js",
     "dev": "nodemon ./src/bot.js",
-    "scrap": "node ./src/api/Anilist/webScrapper.js"
+    "scrap": "node ./src/api/WebScrapper/CurrentDay.js"
   },
   "author": "vitor santos",
   "license": "MIT"
