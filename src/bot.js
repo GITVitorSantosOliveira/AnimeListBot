@@ -6,14 +6,13 @@ const bot = new TelegramBot(TOKEN, {polling: true});
 const { parseDay } = require('./utils/parseParameters/parseDay');
 const { getParameters } = require('./utils/tempList/utilsGetParameters');
 const { getAnime, getSeasonList } = require('./graphql/schemas/anilist');
-// const { MALAnimeDay } = require('./api/MyAnimeList/MALAnimeDay');
-// const getDay = require('./utils/getDay');
+const { ScrapperByDays } = require('./api/WebScrapper/ScrapperByDays');
+const { CurrentDay } = require('./api/WebScrapper/CurrentDay');
+
 const keepRunning  = require('./utils/keepAppRunning');
 
 // config for heroku web start
 const express = require('express');
-const { ScrapperByDays } = require('./api/WebScrapper/ScrapperByDays');
-const { CurrentDay } = require('./api/WebScrapper/CurrentDay');
 
 const app = express()
 app.use(express.json())
@@ -26,6 +25,7 @@ app.listen(port,() => {
 app.get('/', (_req, res) => {
   res.send('<h1>Heelo! Im an bot for telegram, and you can find me on here: @listsofanimebot </h1>')
 })
+
 ///keep app running
 keepRunning()
 //start command
@@ -81,30 +81,6 @@ bot.onText(/\/animeinfo (.+)/, (msg,match) => {
     bot.sendMessage(idChat,'Por Favor, verifique a o que você escreveu. Dados permitidos: nome do anime , TV ou MOVIE')
   }
 })
-
-//request by mal
-// bot.onText(/\/animeday (.+)/, (msg,match)=>{
-//   const msgChatId = msg.chat.id
-//   const resp = match[1]
-
-//   const dayWeek = parseDay(resp,bot)
-//   try {
-//     MALAnimeDay(dayWeek,msgChatId,bot)
-//   } catch (error) {
-//     console.log(error)
-//   }
-// })
-
-// bot.onText(/\/animeday/, (msg)=> {
-//   const dayWeek = getDay(msg.from.language_code)
-//   const dayWeekParsed = parseDay(dayWeek)
-
-//   try {
-//     getAnimeDay(dayWeekParsed,msg.chat.id,bot)
-//   } catch (error) {
-//     console.log(error)
-//   }
-// });
 
 //request by scrapper
 bot.onText(/\/animeday (.+)/, (msg,match)=>{

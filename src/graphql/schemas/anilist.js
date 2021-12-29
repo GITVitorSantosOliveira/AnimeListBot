@@ -16,7 +16,7 @@ const getSeasonList = async (idChat, bot, year, season, format) => {
     var variables = {
       seasonYear: year,
       season: season,
-      format: format != null ? format : "TV"
+      format: format === null || format === undefined ? format : "TV"
     };
 
     const dataApi = await getDataApi(query, variables);
@@ -64,7 +64,7 @@ const getAnime = async (idChat, bot, animeName, format) => {
   `
     var variables = {
       search: animeName,
-      format
+      format: format === null || format === undefined ? format : "TV"
     };
 
     const dataApi = await getDataApi(query, variables);

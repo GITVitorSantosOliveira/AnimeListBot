@@ -8,7 +8,6 @@ async function ScrapperByDays(day,chatID,bot){
     return
   }
 
-  console.log('by days ', day)
   try {
    if(day === 'monday'){
 
@@ -34,10 +33,12 @@ async function ScrapperByDays(day,chatID,bot){
       const scrap = $('.timetable-column.even.Tuesday h2.show-title-bar')
   
       setTimeout(() => {
+        const animes = []
         scrap.each(function (idx, el) {
-          console.log("tuesday",$(el).text() )
-          // bot.sendMessage(chatID,$(el).text())
+          animes.push((`📖 ${$(el).text()}\n`))
+          
         });
+        bot.sendMessage(chatID,animes.toString().replace(/,/g, " "))
       }, 3000);
 
     })
@@ -50,10 +51,12 @@ async function ScrapperByDays(day,chatID,bot){
       const scrap = $('.timetable-column.odd.Wednesday h2.show-title-bar')
   
       setTimeout(() => {
+        const animes = []
         scrap.each(function (idx, el) {
-          console.log('wednesday',$(el).text())
-          // bot.sendMessage(chatID,$(el).text())
+          animes.push((`📖 ${$(el).text()}\n`))
+          
         });
+        bot.sendMessage(chatID,animes.toString().replace(/,/g, " "))
       }, 3000);
 
     })
@@ -66,10 +69,12 @@ async function ScrapperByDays(day,chatID,bot){
       const scrap = $('.timetable-column.even.Thursday h2.show-title-bar')
   
       setTimeout(() => {
+        const animes = []
         scrap.each(function (idx, el) {
-          console.log("thursday",$(el).text() )
-          // bot.sendMessage(chatID,$(el).text())
+          animes.push((`📖 ${$(el).text()}\n`))
+          
         });
+        bot.sendMessage(chatID,animes.toString().replace(/,/g, " "))
       }, 3000);
 
     })
@@ -82,10 +87,12 @@ async function ScrapperByDays(day,chatID,bot){
       const scrap = $('.timetable-column.odd.Friday h2.show-title-bar')
   
       setTimeout(() => {
+        const animes = []
         scrap.each(function (idx, el) {
-          console.log("friday",$(el).text() )
-          // bot.sendMessage(chatID,$(el).text())
+          animes.push((`📖 ${$(el).text()}\n`))
+          
         });
+        bot.sendMessage(chatID,animes.toString().replace(/,/g, " "))
       }, 3000);
 
     })
@@ -98,10 +105,12 @@ async function ScrapperByDays(day,chatID,bot){
       const scrap = $('.timetable-column.even.Saturday h2.show-title-bar')
   
       setTimeout(() => {
+        const animes = []
         scrap.each(function (idx, el) {
-          console.log("saturday",$(el).text() )
-          // bot.sendMessage(chatID,$(el).text())
+          animes.push((`📖 ${$(el).text()}\n`))
+          
         });
+        bot.sendMessage(chatID,animes.toString().replace(/,/g, " "))
       }, 3000);
 
     })
@@ -114,17 +123,19 @@ async function ScrapperByDays(day,chatID,bot){
       const scrap = $('.timetable-column.odd.Sunday h2.show-title-bar')
   
       setTimeout(() => {
+        const animes = []
         scrap.each(function (idx, el) {
-          console.log("sunday",$(el).text() )
-          // bot.sendMessage(chatID,$(el).text())
+          animes.push((`📖 ${$(el).text()}\n`))
+          
         });
+        bot.sendMessage(chatID,animes.toString().replace(/,/g, " "))
       }, 3000);
 
     })
 
    }
   } catch (error) {
-    console.log(error)
+    console.log('error inscrapperByDay',error)
   }
   
 }
