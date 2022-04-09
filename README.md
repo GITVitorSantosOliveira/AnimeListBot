@@ -1,8 +1,11 @@
 # AnimeListBot
 A telegram bot that consists of making apis requests to myanimelist and anilist
 
-## Tecnologies
+## Build With
 - Javascript
 - nodejs
-- ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
-- ![Anilist](https://void.idle.host/anilist/start.png)
+- [GraphQL](https://graphql.org)
+- [Telegram Api](https://core.telegram.org/bots/api)
+- [Anilist Api](https://anilist.gitbook.io/anilist-apiv2-docs/)
+
+The application is running on [Heroku](https://www.heroku.com) and on telegram the bot is called @listsofanimebot
