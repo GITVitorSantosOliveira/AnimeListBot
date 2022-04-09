@@ -1,8 +1,8 @@
 # AnimeListBot
-A telegram bot that consists of making apis requests to myanimelist and anilist
+A telegram bot that consists of making apis requests to Anilist
 
 ## Build With
-- Javascript
+- Javascript 
 - nodejs
 - [GraphQL](https://graphql.org)
 - [Telegram Api](https://core.telegram.org/bots/api)
